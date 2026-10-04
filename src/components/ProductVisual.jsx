@@ -13,7 +13,7 @@ const ProductVisual = forwardRef(({ className = '' }, ref) => {
       <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-cyan-400/15 blur-2xl animate-pulse pointer-events-none" />
 
       {/* Main Container with 3D Perspective */}
-      <div className="relative w-72 sm:w-96 md:w-[480px] lg:w-[540px] xl:w-[600px] aspect-[4/3] flex items-center justify-center">
+      <div className="relative w-64 sm:w-80 md:w-[420px] lg:w-[480px] xl:w-[520px] max-h-[200px] sm:max-h-[240px] md:max-h-[270px] aspect-[16/10] flex items-center justify-center">
         
         {/* Orbital HUD Ring 1 - Outer Tech Reticle */}
         <div className="absolute inset-2 sm:inset-4 border border-cyan-500/20 rounded-full border-dashed animate-[spin_40s_linear_infinite] opacity-40 pointer-events-none" />

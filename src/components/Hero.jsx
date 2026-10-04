@@ -48,19 +48,19 @@ export default function Hero() {
 
       // Set initial states
       gsap.set(containerRef.current, { opacity: 0 });
-      gsap.set(eyebrowRef.current, { opacity: 0, y: -20 });
-      gsap.set(words, { opacity: 0, y: 45, filter: 'blur(8px)' });
-      gsap.set(subtextRef.current, { opacity: 0, y: 25 });
-      gsap.set(visualRef.current, { opacity: 0, scale: 0.8, y: 60, rotationX: 15 });
-      gsap.set(statCards, { opacity: 0, y: 35 });
-      gsap.set(indicatorRef.current, { opacity: 0, y: 15 });
+      gsap.set(eyebrowRef.current, { opacity: 0, y: -15 });
+      gsap.set(words, { opacity: 0, y: 35, filter: 'blur(6px)' });
+      gsap.set(subtextRef.current, { opacity: 0, y: 20 });
+      gsap.set(statCards, { opacity: 0, y: 25 });
+      gsap.set(visualRef.current, { opacity: 0, scale: 0.85, y: 40, rotationX: 10 });
+      gsap.set(indicatorRef.current, { opacity: 0, y: 12 });
       gsap.set([hudBadgeLeftRef.current, hudBadgeRightRef.current], { opacity: 0, scale: 0.9 });
 
       masterTl
         // Hero container appears smoothly
         .to(containerRef.current, {
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power2.inOut',
         })
         // Eyebrow text fades in
@@ -69,7 +69,7 @@ export default function Hero() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.6,
           },
           '-=0.3'
         )
@@ -80,11 +80,11 @@ export default function Hero() {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: 0.9,
-            stagger: 0.12,
-            ease: 'back.out(1.4)',
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'back.out(1.3)',
           },
-          '-=0.4'
+          '-=0.35'
         )
         // Supporting text fades upward
         .to(
@@ -92,9 +92,21 @@ export default function Hero() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
+            duration: 0.6,
           },
-          '-=0.5'
+          '-=0.45'
+        )
+        // Statistics appear sequentially with subtle stagger
+        .to(
+          statCards,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power3.out',
+          },
+          '-=0.4'
         )
         // Main visual enters with polished movement & scale effect
         .to(
@@ -104,33 +116,21 @@ export default function Hero() {
             scale: 1,
             y: 0,
             rotationX: 0,
-            duration: 1.2,
+            duration: 1.0,
             ease: 'expo.out',
           },
-          '-=0.6'
+          '-=0.5'
         )
-        // HUD badges pop in
+        // HUD telemetry badges pop in
         .to(
           [hudBadgeLeftRef.current, hudBadgeRightRef.current],
           {
             opacity: 1,
             scale: 1,
-            duration: 0.6,
-            stagger: 0.1,
+            duration: 0.5,
+            stagger: 0.08,
           },
-          '-=0.7'
-        )
-        // Statistics appear sequentially with subtle stagger
-        .to(
-          statCards,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.14,
-            ease: 'power3.out',
-          },
-          '-=0.5'
+          '-=0.6'
         )
         // Scroll indicator appears last
         .to(
@@ -138,9 +138,9 @@ export default function Hero() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.5,
           },
-          '-=0.3'
+          '-=0.25'
         );
 
       // ==========================================
@@ -159,15 +159,15 @@ export default function Hero() {
         },
       });
 
-      // Phase 1 (0% -> 45% of scroll):
-      // Headline and stats glide with subtle parallax and fade out slightly to give focal stage to visual
+      // Phase 1 (0% -> 50% of scroll):
+      // Headline, subtext, and stats glide upward with parallax and fade
       scrollTl
         .to(
           headlineRef.current,
           {
-            y: -120,
-            opacity: 0.15,
-            scale: 0.94,
+            y: -100,
+            opacity: 0.1,
+            scale: 0.95,
             filter: 'blur(4px)',
             ease: 'power1.out',
           },
@@ -176,7 +176,7 @@ export default function Hero() {
         .to(
           eyebrowRef.current,
           {
-            y: -60,
+            y: -50,
             opacity: 0,
             ease: 'power1.out',
           },
@@ -185,8 +185,19 @@ export default function Hero() {
         .to(
           subtextRef.current,
           {
-            y: -80,
+            y: -60,
             opacity: 0,
+            ease: 'power1.out',
+          },
+          0
+        )
+        .to(
+          statCards,
+          {
+            y: isMobile ? -30 : -45,
+            scale: 0.94,
+            opacity: 0.2,
+            stagger: 0.04,
             ease: 'power1.out',
           },
           0
@@ -204,9 +215,9 @@ export default function Hero() {
         .to(
           bgGlowRef.current,
           {
-            scale: 1.4,
-            opacity: 0.9,
-            y: 100,
+            scale: 1.35,
+            opacity: 0.85,
+            y: 80,
             ease: 'sine.inOut',
           },
           0
@@ -215,9 +226,9 @@ export default function Hero() {
         .to(
           visualRef.current,
           {
-            y: isMobile ? 30 : -40,
+            y: isMobile ? -20 : -50,
             x: isMobile ? 0 : (isTablet ? 30 : 60),
-            scale: isMobile ? 1.08 : 1.22,
+            scale: isMobile ? 1.12 : 1.25,
             rotationZ: isMobile ? 3 : 5,
             rotationY: isMobile ? -6 : -12,
             ease: 'power2.inOut',
@@ -228,8 +239,8 @@ export default function Hero() {
         .to(
           hudBadgeLeftRef.current,
           {
-            x: -80,
-            opacity: 0.2,
+            x: -70,
+            opacity: 0.15,
             ease: 'power1.out',
           },
           0
@@ -237,58 +248,46 @@ export default function Hero() {
         .to(
           hudBadgeRightRef.current,
           {
-            x: 80,
-            opacity: 0.2,
-            ease: 'power1.out',
-          },
-          0
-        )
-        // Statistics elevate and shift dynamically
-        .to(
-          statCards,
-          {
-            y: isMobile ? -30 : -50,
-            scale: 0.96,
-            opacity: 0.4,
-            stagger: 0.05,
+            x: 70,
+            opacity: 0.15,
             ease: 'power1.out',
           },
           0
         );
 
-      // Phase 2 (45% -> 100% of scroll):
-      // Visual completes dramatic kinetic sweep and docks toward lower right before transitioning to Section 2
+      // Phase 2 (50% -> 100% of scroll):
+      // Visual completes dramatic kinetic sweep and docks before transitioning to Section 2
       scrollTl
         .to(
           visualRef.current,
           {
-            y: isMobile ? 90 : 120,
-            x: isMobile ? 0 : (isTablet ? -40 : -80),
-            scale: isMobile ? 1.02 : 1.15,
+            y: isMobile ? 70 : 90,
+            x: isMobile ? 0 : (isTablet ? -40 : -70),
+            scale: isMobile ? 1.05 : 1.18,
             rotationZ: isMobile ? -2 : -4,
             rotationY: isMobile ? 4 : 8,
             ease: 'power2.inOut',
           },
-          0.45
+          0.5
         )
         .to(
           headlineRef.current,
           {
-            y: -180,
+            y: -160,
             opacity: 0,
             ease: 'power2.in',
           },
-          0.45
+          0.5
         )
         .to(
           statCards,
           {
-            y: -100,
+            y: -90,
             opacity: 0,
-            stagger: 0.03,
+            stagger: 0.02,
             ease: 'power2.in',
           },
-          0.45
+          0.5
         );
     }, triggerRef);
 
@@ -302,7 +301,7 @@ export default function Hero() {
       {/* Pinned Viewport Container */}
       <div
         ref={containerRef}
-        className="sticky top-0 h-screen w-full flex flex-col justify-between items-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6 sm:pb-8 overflow-hidden bg-[#030712]"
+        className="sticky top-0 h-screen w-full flex flex-col justify-between items-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-3 sm:pb-4 overflow-hidden bg-[#030712]"
       >
         {/* Ambient Parallax Glows & Grid */}
         <div
@@ -312,53 +311,53 @@ export default function Hero() {
         <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
 
         {/* Ambient Top Lighting Beam */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-48 bg-gradient-to-b from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-40 bg-gradient-to-b from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl pointer-events-none" />
 
         {/* Floating Telemetry Coordinates / Top HUD Badges */}
         <div
           ref={hudBadgeLeftRef}
-          className="hidden lg:flex absolute top-28 left-8 xl:left-16 flex-col gap-1 p-3 rounded-xl glass-panel text-[11px] font-mono-tech text-slate-400 border-slate-800 z-10"
+          className="hidden xl:flex absolute top-20 left-8 flex-col gap-1 p-2.5 rounded-xl glass-panel text-[10px] font-mono-tech text-slate-400 border-slate-800 z-10"
         >
-          <div className="flex items-center gap-2 text-cyan-400 font-semibold">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+          <div className="flex items-center gap-1.5 text-cyan-400 font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
             <span>SYS // PROTOCOL 0.94</span>
           </div>
-          <div>VELOCITY VECTOR: KINETIC</div>
-          <div>FRAME RATE: LOCKED 60FPS</div>
+          <div>VELOCITY: KINETIC</div>
+          <div>FPS: LOCKED 60</div>
         </div>
 
         <div
           ref={hudBadgeRightRef}
-          className="hidden lg:flex absolute top-28 right-8 xl:right-16 flex-col gap-1 p-3 rounded-xl glass-panel text-[11px] font-mono-tech text-slate-400 border-slate-800 z-10 text-right"
+          className="hidden xl:flex absolute top-20 right-8 flex-col gap-1 p-2.5 rounded-xl glass-panel text-[10px] font-mono-tech text-slate-400 border-slate-800 z-10 text-right"
         >
           <div className="text-cyan-400 font-semibold">AERODYNAMIC CORE</div>
           <div>SCROLL SYNCHRONIZED</div>
           <div>PRESSURE: 101.3 KPA</div>
         </div>
 
-        {/* Header Block: Eyebrow + Generous Letter-Spaced Headline + Subtext */}
-        <div className="relative z-20 flex flex-col items-center text-center max-w-5xl mx-auto mt-2 sm:mt-4">
+        {/* Top Section: Eyebrow + Scaled Headline + Supporting Text */}
+        <div className="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto w-full">
           
           {/* Small Brand / Eyebrow Text */}
           <div
             ref={eyebrowRef}
-            className="inline-flex items-center gap-2 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-mono-tech tracking-[0.25em] uppercase shadow-lg shadow-cyan-950/40 mb-3 sm:mb-4"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-[10px] sm:text-xs font-mono-tech tracking-[0.22em] uppercase shadow-md shadow-cyan-950/40 mb-1.5 sm:mb-2"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             KINETIC SCROLL EXPERIENCE
           </div>
 
-          {/* Large Headline with generous letter spacing */}
+          {/* Large Headline (scaled ~20% tighter for optimal viewport balance) */}
           <h1
             ref={headlineRef}
-            className="font-display font-black text-white text-center leading-[1.08] tracking-[0.18em] sm:tracking-[0.22em] md:tracking-[0.28em] text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase select-none drop-shadow-2xl"
+            className="font-display font-black text-white text-center leading-[1.05] tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.24em] text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase select-none drop-shadow-xl"
           >
-            <div className="flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-8">
+            <div className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-6">
               <span className="reveal-word inline-block text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-400">
                 W E L C O M E
               </span>
             </div>
-            <div className="flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-8 mt-1 sm:mt-2">
+            <div className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-6 mt-0.5 sm:mt-1">
               <span className="reveal-word inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-blue-400 text-glow-cyan">
                 I T Z
               </span>
@@ -371,24 +370,25 @@ export default function Hero() {
           {/* Short Supporting Sentence */}
           <p
             ref={subtextRef}
-            className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 max-w-xl font-sans font-light tracking-wide leading-relaxed px-4 text-center"
+            className="mt-1 sm:mt-1.5 text-xs sm:text-sm text-slate-300 max-w-lg font-sans font-light tracking-wide leading-relaxed px-4 text-center"
           >
             A scroll-driven kinetic frontier engineered for seamless motion, tactile physics, and uncompromising visual engagement.
           </p>
+
+          {/* Three Statistics directly below supporting text */}
+          <div className="w-full mt-2.5 sm:mt-3">
+            <Stats ref={statsRef} />
+          </div>
         </div>
 
-        {/* Central Kinetic Visual */}
-        <div className="relative z-10 my-auto w-full flex items-center justify-center py-2">
-          <ProductVisual ref={visualRef} />
+        {/* Central Kinetic Visual (Clearly prominent and visible in first viewport) */}
+        <div className="relative z-10 flex-1 w-full flex items-center justify-center py-1 sm:py-2 min-h-0">
+          <ProductVisual ref={visualRef} className="max-h-full" />
         </div>
 
-        {/* Bottom Section: Three Statistics + Scroll Indicator */}
-        <div className="relative z-20 w-full flex flex-col items-center gap-4 sm:gap-6 mt-auto">
-          {/* Three Statistics */}
-          <Stats ref={statsRef} />
-
-          {/* Small Scroll Indicator */}
-          <ScrollIndicator ref={indicatorRef} className="mt-1" />
+        {/* Small Scroll Indicator */}
+        <div className="relative z-20 w-full flex justify-center pb-1">
+          <ScrollIndicator ref={indicatorRef} />
         </div>
 
       </div>

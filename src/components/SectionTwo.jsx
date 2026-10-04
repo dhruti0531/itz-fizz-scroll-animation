@@ -27,7 +27,7 @@ const FEATURES = [
 
 export default function SectionTwo() {
   return (
-    <section id="explore" className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-[#030712] border-t border-slate-800/80 overflow-hidden">
+    <section id="explore" className="relative scroll-mt-20 sm:scroll-mt-24 pt-28 sm:pt-36 pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 bg-[#030712] border-t border-slate-800/80 overflow-hidden">
       {/* Ambient background glow & grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-64 bg-gradient-to-b from-cyan-500/10 via-blue-600/5 to-transparent blur-3xl pointer-events-none" />
